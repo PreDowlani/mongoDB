@@ -1,0 +1,170 @@
+use("fotored");
+
+// db.createCollection("redsocial");
+
+// show collections
+
+//CREAMOS LA BASE DE DATOS Y AÑADIMOS LOS DATOS:
+// db.redsocial.insertMany([
+//     {
+//         usuario:"Goku",
+//         mensajes:"El mono de la planeta Tierra",
+//         conectado:"si",
+//         seguidores:500,
+//         sigue:"Dragon Ball Z",
+//         puntuacion:1000
+//     },
+//     {
+//         usuario:"Yamcha",
+//         mensajes:"El Maricon de Dragon Ball",
+//         conectado:"no",
+//         seguidores:100,
+//         sigue:"Dragon Ball",
+//         puntuacion:500
+//     },
+//     {
+//         usuario:"Vegeta",
+//         mensajes:"El rey Saiyan",
+//         conectado:"si",
+//         seguidores:1000,
+//         sigue:"Dragon ball Z",
+//         puntuacion:5000,
+//     },
+//     {
+//         usuario:"Krilin",
+//         mensajes:"El calvito del grupo",
+//         conectado:"no",
+//         seguidores:200,
+//         sigue:"Dragon Ball",
+//         puntuacion:850,
+//     }])
+
+// Insertamos solo a un Usuario:
+// db.redsocial.insertOne({
+//     usuario:"Juan50mm",
+//     mensajes:"Porque no me lo coge",
+//     conectado : "si",
+//     seguidores : 250,
+//     sigue :"One Piece",
+//     puntuacion : 770
+// })
+
+// db.redsocial.insertOne({
+//     usuario:"CamilaAP",
+//     mensajes:"Soy una Lobaaa",
+//     conectado : "20",
+//     seguidores : 20500,
+//     sigue :"Revista Hot Bunny",
+//     puntuacion : 9999
+// })
+
+// Insertamos a varios usuarios en un solo comando:
+// db.redsocial.insertMany([{
+//     usuario:"FrankEOS",
+//     mensajes:"Soy un pesaditoo",
+//     conectado : "si",
+//     seguidores : 660,
+//     sigue :"One Piece",
+//     puntuacion : 770
+// },
+// {
+//     usuario:"BenLandscape",
+//     mensajes:"Vendeor de Mariguana",
+//     conectado : "si",
+//     seguidores : 999,
+//     sigue :"One Piece",
+//     puntuacion : 770
+// },
+// {
+//     usuario:"PaulaShutter",
+//     mensajes:"Adicto al azucar",
+//     conectado : "20",
+//     seguidores : 680,
+//     sigue :"Dragon Ball",
+//     puntuacion : 770
+// }])
+
+// Buscamos a todos los clientes que estan conectados:
+// db.redsocial.find({conectado:"si"})
+
+// Buscamos a los clientes que tienen mas de 100 seguidores:
+// db.redsocial.find({seguidores : {$gt:100}})
+
+// Cambiamos el numero de seguidores de CamilaAP
+// db.redsocial.updateOne({usuario:"CamilaAP"}, {$set:{seguidores:101}})
+
+// Si buscamos a camila , ya esta actualizada con sus nuevos datos
+// db.redsocial.find({usuario:"CamilaAP"})
+
+// Añadimos a todos los usuarios un nuevo campo llamado estilo:
+// db.redsocial.updateMany({},{$set:{estilo:"paisajes"}})
+
+// Ya estan actualizados los usuarios con su nuevo campo
+// db.redsocial.find()
+
+// Editamos a Camila y a Frank con su nuevo estilo y depues lo comprobamos:
+// db.redsocial.updateOne({usuario:"FrankEOS"}, {$set:{estilo:"retrato"}})
+
+// db.redsocial.updateOne({usuario:"CamilaAP"},{$set:{estilo:"retrato"}})
+// db.redsocial.find({estilo:"retrato"})
+
+// db.redsocial.updateMany(
+//   { $or: [{ usuario: "CamilaAP" }, { usuario: "FrankEOS" }] },
+//   { $set: { estilo: "negro" } }
+// );
+// db.redsocial.find();
+
+// Eliminamos el campo de puntuacion a todos los usuarios:
+// db.redsocial.updateMany({},{$unset:{puntuacion:"" }})
+
+// Añadimos el campo de Puntuacion a todos los usuarios con un numero inicial:
+// db.redsocial.updateMany({}, {$set:{puntuacion:0}})
+
+// Aqui buscando a todos los usuarios se ven que todos estan actualizado con sus nuevos datos :
+// db.redsocial.find()
+// db.redsocial.updateOne({usuario:"Goku"},{$set:{mensajes:"ESTOY CON SAMEEKSHA"}})
+// db.redsocial.find()
+// -----------------------------------------------------------------------------------
+// PRACTIA 2-MONGODB
+
+// Asignar 50 puntos a PaulaShutter
+
+// db.redsocial.updateOne(
+//   { usuario: "PaulaShutter" },
+//   { $set: { puntuacion: 50 } }
+// );
+
+// db.redsocial.find({ usuario: "PaulaShutter" });
+
+// Asignar 10 puntos al rest
+
+// db.redsocial.updateMany(
+//   { usuario: { $nin: ["PaulaShutter"] } },
+//   { $set: { puntuacion: 10 } }
+// );
+
+// db.redsocial.find();
+
+// Buscar todos los usuarios cuya puntuacion sea 10,40 o 50
+
+// db.redsocial.find({ puntuacion: { $in: [10, 40, 50] } });
+
+// buscar todos los usuarios cuya puntuacion no sea 10
+// db.redsocial.find({ puntuacion: { $ne: 10 } });
+
+// 	Buscar aquellos usuarios cuyo estilo no sea ni retrato, ni paisaje.
+// No aparece nada, un array vacio.
+// db.redsocial.find({ estilo: { $nin: ["retrato", "paisajes"] } });
+
+// Borrar todos los usuarios con puntuación de 40 o 50
+// db.redsocial.deleteMany({ puntuacion: { $in: [40, 50] } });
+// se comprueba que no hay ningun usuario que tenga la puntuacion 40 o 50
+// db.redsocial.find();
+
+// Poner como desconectados a todos los usuarios
+// db.redsocial.updateMany({}, { $set: { conectado: "no" } });
+// lo comprobamos que estan todos desconectados:
+// db.redsocial.find();
+
+// Mostrar a todos los usuarios que siguen a más de 1000 usuarios.
+// db.redsocial.find({ sigue: { $gt: 1000 } });

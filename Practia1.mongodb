@@ -1,0 +1,14 @@
+use ("fotored") ;
+
+// db.createCollection("redsocial");
+
+db.redsocial.insertMany([{usuario:"Goku", mensajes:"El mono de la planeta Tierra", conectado:"si",seguidores:500,  sigue:"Dragon Ball Z", puntuacion: 1000},
+{usuario:"Vegeta", mensajes:"El rey Saiyan", conectado: "si", seguidores:1000, sigue: "Dragon ball Z" , puntuacion: 5000},
+{usuario:"Krilin", mensajes:"El calvito del grupo",conectado:"no",seguidores:200,sigue:"Dragon Ball",puntuacion:850},
+{usuario:"Yamcha",mensajes:"El Maricon de Dragon Ball",conectado:"no",seguidores:100,sigue:"Dragon Ball",puntuacion:500}
+])
+
+db.redsocial.insertOne({usuario:"Juan50mm",mensajes:["Estoy loco","Pero muy loco"],conectado:"si",seguidores:250,sigue:"One Piece",puntuacion:770})
+db.redsocial.find()
+
+
